@@ -1,11 +1,14 @@
 const createError = require('http-errors');
+const cors = require('cors');
 const express = require('express');
+require('express-async-errors');
 const logger = require('morgan');
 const taskRouter = require('./routes/task.router');
 const authRouter = require('./routes/auth.router');
 
 const app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -20,7 +20,7 @@ const User = sequelize.define(
     password: {
       type: DataTypes.STRING,
       set(value) {
-        this.setDataValue('password', bcrypt.hashSync(value, process.env.SALT_ROUNDS));
+        this.setDataValue('password', bcrypt.hashSync(value, Number(process.env.SALT_ROUNDS)));
       },
     },
     name: {
