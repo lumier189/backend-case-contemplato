@@ -5,6 +5,7 @@ require('express-async-errors');
 const logger = require('morgan');
 const taskRouter = require('./routes/task.router');
 const authRouter = require('./routes/auth.router');
+const starWarsRouter = require('./routes/starwars.router');
 
 const app = express();
 
@@ -13,8 +14,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/task', taskRouter);
+app.use('/tasks', taskRouter);
 app.use('/auth', authRouter);
+app.use('/starwars', starWarsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

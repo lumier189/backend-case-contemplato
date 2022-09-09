@@ -12,8 +12,18 @@ async function edit(req, res) {
   }));
 }
 
+async function destroy(req, res) {
+  return res.status(204).json(await Task.destroy({
+    where: {
+      id: req.params.id,
+    },
+  }));
+}
+
 async function list(req, res) {
   return res.json(await Task.findAll());
 }
 
-module.exports = { create, edit, list };
+module.exports = {
+  create, edit, destroy, list,
+};

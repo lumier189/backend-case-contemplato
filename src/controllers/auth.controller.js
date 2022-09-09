@@ -12,7 +12,12 @@ async function login(req, res) {
     throw error;
   }
   const { id } = user;
-  const token = jwt.sign({ id }, SECRET, { expiresIn: 60 * 3 });
+  const token = jwt.sign({ id }, SECRET, { expiresIn: 60 * 10 });
+  return res.json({ token, expiresIn: +new Date() + 1000 * 60 * 10 });
+}
+
+async function refresh(req, res) {
+  const token = jwt.sign({ id: req.userId }, SECRET, { expiresIn: 60 * 10 });
   return res.json({ token, expiresIn: +new Date() + 1000 * 60 * 10 });
 }
 
@@ -32,4 +37,6 @@ async function register(req, res) {
   }));
 }
 
-module.exports = { login, register, profile };
+module.exports = {
+  login, register, profile, refresh,
+};
